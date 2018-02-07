@@ -12,12 +12,17 @@ import java.sql.Statement;
 public class Consultar {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		//buscar el nombre del river en apache tomcat..mysql
+		//buscar el nombre del river en apache tomcat..mysql // carga del controlador en el DriverM
 		Class.forName("com.mysql.jdbc.Driver");
-		//hacer conexion. no se hace un new xk es interfaz
+		//recuperacion de conexion, no se hace un new xk es interfaz
 		Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/biblioteca", "root","");
 		
-		//con la conexion
+		
+		//consigues la url del jdbc
+//		DatabaseMetaData dmd=conn.getMetaData();
+//		System.out.println("URL JDBC: " + dmd.getURL());
+		
+		//con la conexion creamos la consulta
 		Statement st= conn.createStatement();
 		//ejecutar las instrucciones query. RS contenedor donde se guarda todo.
 		ResultSet rs = st.executeQuery("select * from libros");
@@ -26,7 +31,7 @@ public class Consultar {
 			 System.out.println("Titulo " + rs.getString("titulo"));
 			 System.out.println("Autor " + rs.getString("autor"));
 			 System.out.println("Fecha " + rs.getDate("fechapublicacion"));
-			 System.out.println("Precio " + rs.getFloat("precio")+ "€");
+			 System.out.println("Precio " + rs.getFloat("precio")+ "â‚¬");
 		}		
 		
 		System.out.println("----------------------------");
@@ -42,7 +47,7 @@ public class Consultar {
 			 System.out.println("Titulo de rs1 " + rs1.getString("titulo"));
 			 System.out.println("Autor " + rs1.getString("autor"));
 			 System.out.println("Fecha " + rs1.getDate("fechapublicacion"));
-			 System.out.println("Precio " + rs1.getFloat("precio")+ "€");
+			 System.out.println("Precio " + rs1.getFloat("precio")+ "â‚¬");
 		}
 		System.out.println("----------------------------");
 		//callable
@@ -53,7 +58,7 @@ public class Consultar {
 			 System.out.println("Titulo de rs2 " + rs2.getString("titulo"));
 			 System.out.println("Autor " + rs2.getString("autor"));
 			 System.out.println("Fecha " + rs2.getDate("fechapublicacion"));
-			 System.out.println("Precio " + rs2.getFloat("precio")+ "€");
+			 System.out.println("Precio " + rs2.getFloat("precio")+ "â‚¬");
 		}
 		
 		System.out.println("-------sin el libro origen----------------------------");
@@ -65,10 +70,16 @@ public class Consultar {
 			 System.out.println("Titulo de rs2 " + rs3.getString("titulo"));
 			 System.out.println("Autor " + rs3.getString("autor"));
 			 System.out.println("Fecha " + rs3.getDate("fechapublicacion"));
-			 System.out.println("Precio " + rs3.getFloat("precio")+ "€");
+			 System.out.println("Precio " + rs3.getFloat("precio")+ "â‚¬");
 		}
 		
-		
+		//actualizar datos
+//		PreparedStatement ps= conn.prepareStatement("update libros set autor= ? where titulo=?");
+//		
+//		ps.setString(1, "Ediciones eni");
+//		ps.setString(2, "J2EE");
+//		int cambiar= ps.executeUpdate();
+//		System.out.println(cambiar);
 	}
 	
 }
